@@ -18,7 +18,7 @@
             <ul>
                 <li><a href="#tentang">Tentang Kami</a></li>
                 <li><a href="#menu">Menu</a></li>
-                <li><a href="#lokasi">Lokasi</a></li>
+                <li><a href="#order-section">Pesan</a></li> <li><a href="#lokasi">Lokasi</a></li>
                 <li><a href="#kontak">Kontak</a></li>
             </ul>
         </nav>
@@ -27,7 +27,7 @@
     <main class="container">
         
         <div class="hero">
-            <h1>Roso Kediri,Sruput Sejati</h1>
+            <h1>Roso Kediri, Sruput Sejati</h1>
         </div>
         
         <section id="tentang" class="section">
@@ -43,36 +43,32 @@
         <section id="menu" class="section">
             <h2>Pilihan Menu Kami</h2>
             
-            <h3>Kopi Favorit</h3>
+            <h3>Kopi Favorit (Klik untuk Memilih!)</h3>
             <div class="menu-grid">
                 
                 <div class="menu-item">
                     <img src="kopi espressoooo.jpg" alt="Espresso" title="Espresso">
                     <h4>Espresso</h4>
-                    <p>Rp 22.000</p>
-                </div>
+                    <p class="price">Rp 22.000</p> </div>
 
                 <div class="menu-item">
                     <img src="cappucinoooooo.jpg" alt="Cappuccino" title="Cappuccino">
                     <h4>Cappuccino</h4>
-                    <p>Rp 10.000</p>
-                </div>
+                    <p class="price">Rp 10.000</p> </div>
 
                 <div class="menu-item">
                     <img src="caramel.jpg" alt="Latte Caramel" title="Latte Caramel">
                     <h4>Latte Caramel</h4>
-                    <p>Rp 24.000</p>
-                </div>
+                    <p class="price">Rp 24.000</p> </div>
 
                 <div class="menu-item">
                     <img src="kopi susu.jpeg" alt="Kopi Susu Senja" title="Kopi Susu Senja (House Blend)">
                     <h4>Kopi Susu Senja</h4>
-                    <p>Rp 13.000</p>
-                </div>
+                    <p class="price">Rp 13.000</p> </div>
 
             </div>
             
-            <h3>Camilan Manis</h3>
+            <h3>Camilan Manis (Pesan Langsung ke Kasir)</h3>
             <div class="snack-list">
                 <ul>
                     <li>Cheesecake Lumer - Rp 20.000</li>
@@ -82,7 +78,18 @@
                 </ul>
             </div>
         </section>
+        
+        <section id="order-section" class="section call-to-action">
+            <h2>Pesan Kopi Anda Sekarang!</h2>
+            <p>Pilih salah satu menu kopi di atas, masukkan nomor meja Anda, lalu klik tombol pesan untuk mengirimkan pesanan melalui WhatsApp.</p>
 
+            <div class="order-form">
+                <label for="tableNumberInput">Nomor Meja Anda:</label>
+                <input type="number" id="tableNumberInput" placeholder="Contoh: 05" required min="1">
+                
+                <button id="orderButton">Pesan Sekarang via WhatsApp</button>
+            </div>
+        </section>
         <section id="lokasi" class="section">
             <div class="section-content">
                 <h2>Temukan Kami</h2>
