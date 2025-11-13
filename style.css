@@ -6,10 +6,11 @@
 /* --- Variabel Warna --- */
 :root {
     --color-coffee: #6F4E37; /* Cokelat tua */
-    --color-Khaki:#C3B091; /* Khaki / latar belakang */
+    --color-khaki: #C3B091; /* Khaki / latar belakang (kecil untuk konsistensi) */
     --color-light-brown: #A08365;
     --color-gold: #D2B48C; /* Garis elegan */
     --color-text: #4A4A4A;
+    --whatsapp-green: #25D366;
 }
 
 /* --- General & Body Styling --- */
@@ -17,7 +18,7 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--color-Khaki);
+    background-color: var(--color-khaki);
     color: var(--color-text);
     line-height: 1.6;
 }
@@ -93,7 +94,7 @@ nav ul li a:hover {
 
 /* --- Hero Section Styling --- */
 .hero {
-    background-image: url('cafe-image.jpg'); /* Ganti dengan gambar Anda */
+    background-image: url('cafe-image.jpg'); /* Pastikan file ini ada; ganti sesuai nama file Anda */
     background-position: center;
     background-size: cover;
     height: 400px; 
@@ -181,7 +182,6 @@ nav ul li a:hover {
     box-shadow: 0 8px 15px rgba(255, 215, 0, 0.4);
 }
 
-
 .menu-item img {
     width: 100%;
     max-height: 150px;
@@ -195,21 +195,92 @@ nav ul li a:hover {
     color: var(--color-coffee);
 }
 
-.menu-item p {
-    font-weight: bold;
+/* Khusus label harga pada item menu agar tidak memengaruhi semua <p> */
+.menu-item .price {
+    font-weight: 700;
     color: var(--color-light-brown);
-    margin: 0;
+    margin: 6px 0 0;
+    display: block;
 }
 
-.snack-list ul {
-    list-style: square;
-    padding-left: 20px;
+/* Tombol tambah (jika nanti memakai multi-item) */
+.add-to-cart {
+    display: inline-block;
     margin-top: 10px;
-}
-.snack-list li {
-    padding: 5px 0;
+    padding: 8px 12px;
+    background: var(--color-coffee);
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
 }
 
+/* --- Form pemesanan (input dan tombol) --- */
+#tableNumberInput {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 6px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+#orderButton {
+    background: var(--whatsapp-green);
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.18);
+}
+
+#orderButton:active { transform: translateY(1px); }
+
+/* --- Styles untuk keranjang (siap pakai jika memakai multi-item) --- */
+.cart{
+    background:#fff;
+    padding:12px;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.03);
+    min-width:280px;
+}
+
+.cart-items{
+    list-style:none;
+    padding:0;
+    margin:0;
+    max-height:260px;
+    overflow:auto;
+}
+
+.cart-items li{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    padding:8px 4px;
+    border-bottom:1px dashed #f0f0f0;
+    align-items:center;
+}
+
+.cart-items li.empty {
+    color: #888;
+    text-align: center;
+}
+
+/* Kontrol qty */
+.qty-controls{ display:flex; gap:6px; align-items:center; }
+.qty-controls button{ padding:4px 8px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; }
+
+/* Tombol hapus */
+.remove-btn{ background:transparent; border:none; color:#c0392b; cursor:pointer; }
+
+/* Footer keranjang */
+.cart-footer{ display:flex; justify-content:space-between; align-items:center; margin-top:10px; }
+#cartTotal { font-weight:700; color: var(--color-coffee); }
+#clearCartBtn { background:#eee; border:none; padding:6px 8px; border-radius:6px; cursor:pointer; }
 
 /* --- Footer Styling --- */
 footer {
