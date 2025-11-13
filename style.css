@@ -52,7 +52,7 @@ header {
 /* Efek saat menggulir (JavaScript akan menambahkan kelas ini) */
 header.scrolled {
     padding: 0.8em 0;
-    background-color: #5A402D;
+    background-color: #B7966B;
 }
 
 header.scrolled h1 {
