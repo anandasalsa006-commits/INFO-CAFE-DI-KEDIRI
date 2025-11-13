@@ -6,7 +6,7 @@
 /* --- Variabel Warna --- */
 :root {
     --color-coffee: #6F4E37; /* Cokelat tua */
-    --color-cream: #EDEAE4; /* Krem / latar belakang */
+    --color-Khaki:#C3B091; /* Khaki / latar belakang */
     --color-light-brown: #A08365;
     --color-gold: #D2B48C; /* Garis elegan */
     --color-text: #4A4A4A;
@@ -17,7 +17,7 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--color-cream);
+    background-color: var(--color-Khaki);
     color: var(--color-text);
     line-height: 1.6;
 }
