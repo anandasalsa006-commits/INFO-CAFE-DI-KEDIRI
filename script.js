@@ -1,98 +1,139 @@
 /*
  * File: script.js
- * Deskripsi: Interaktivitas untuk Kafe Kopi Senja
+ * Deskripsi: Keranjang multi-item + kirim ke WhatsApp
+ * Asumsi HTML:
+ * - Setiap .menu-item memiliki data-id (unik) dan data-price (angka tanpa pemisah)
+ * - Ada tombol .add-to-cart di tiap menu-item
+ * - Ada elemen #cartItems (ul), #cartTotal, #clearCartBtn, #tableNumberInput, #orderButton
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Ambil elemen-elemen yang dibutuhkan
-    const header = document.querySelector('header');
-    const menuItems = document.querySelectorAll('.menu-item'); // Ambil item menu kopi
-    
-    // --- Elemen Baru untuk Pesanan WhatsApp ---
-    const orderButton = document.querySelector('#orderButton'); // Tombol "Pesan Sekarang" (Asumsi: ID orderButton)
-    const tableNumberInput = document.querySelector('#tableNumberInput'); // Input Nomor Meja (Asumsi: ID tableNumberInput)
-    
-    // --- Nomor WhatsApp Tujuan DENGAN PERBAIKAN ---
-    // Nomor WhatsApp dalam format internasional (kode negara 62, tanpa 0 di depan, tanpa simbol).
-    // Dulu: '085850978793'
-    const whatsappNumber = '6285850978793'; // Diperbaiki: Menggunakan 62 sebagai kode negara
+(() => {
+  const phoneNumber = "6285850978793";
+  const addButtons = document.querySelectorAll('.add-to-cart');
+  const cartItemsEl = document.getElementById('cartItems');
+  const cartTotalEl = document.getElementById('cartTotal');
+  const orderButton = document.getElementById('orderButton');
+  const tableInput = document.getElementById('tableNumberInput');
+  const clearCartBtn = document.getElementById('clearCartBtn');
 
-    // --- Fungsi Scroll Header (Sticky Effect) ---
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            // Tambahkan kelas 'scrolled' setelah menggulir 50px
-            header.classList.add('scrolled');
-        } else {
-            // Hapus kelas 'scrolled' jika kembali ke atas
-            header.classList.remove('scrolled');
-        }
+  const cart = {};
+
+  addButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const itemEl = e.target.closest('.menu-item');
+      const id = itemEl.dataset.id || itemEl.querySelector('h4').textContent.trim();
+      const name = itemEl.querySelector('h4').textContent.trim();
+      const price = parseInt(itemEl.dataset.price || itemEl.querySelector('.price')?.textContent?.replace(/[^\d]/g,'') || '0', 10);
+      addToCart({ id, name, price });
     });
+  });
 
-    // --- Fungsi Highlight Menu Item saat diklik ---
-    menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-            // Hapus kelas 'highlighted' dari semua item terlebih dahulu
-            menuItems.forEach(i => i.classList.remove('highlighted'));
+  if (clearCartBtn) clearCartBtn.addEventListener('click', () => {
+    if (confirm('Kosongkan keranjang?')) {
+      for (const k of Object.keys(cart)) delete cart[k];
+      renderCart();
+    }
+  });
 
-            // Tambahkan kelas 'highlighted' hanya pada item yang diklik
-            item.classList.add('highlighted');
-            
-            const itemName = item.querySelector('h4').textContent;
-            console.log(`Menu ${itemName} dipilih sebagai favorit!`);
-        });
+  function addToCart({ id, name, price }) {
+    if (!cart[id]) cart[id] = { id, name, price, qty: 1 };
+    else cart[id].qty += 1;
+    renderCart();
+  }
+
+  function updateQty(id, newQty) {
+    if (!cart[id]) return;
+    if (newQty <= 0) delete cart[id];
+    else cart[id].qty = newQty;
+    renderCart();
+  }
+
+  function renderCart() {
+    if (!cartItemsEl) return;
+    cartItemsEl.innerHTML = '';
+    const keys = Object.keys(cart);
+    if (keys.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'empty';
+      li.textContent = 'Belum ada pesanan';
+      cartItemsEl.appendChild(li);
+      cartTotalEl.textContent = formatRupiah(0);
+      return;
+    }
+    let total = 0;
+    keys.forEach(key => {
+      const item = cart[key];
+      total += item.price * item.qty;
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div style="flex:1">
+          <strong>${escapeHtml(item.name)}</strong>
+          <div style="color:#666;font-size:13px">${formatRupiah(item.price)} / pcs</div>
+        </div>
+      `;
+      const right = document.createElement('div');
+      right.style.display = 'flex';
+      right.style.alignItems = 'center';
+      right.style.gap = '8px';
+
+      const minus = document.createElement('button'); minus.textContent = '−';
+      minus.addEventListener('click', () => updateQty(item.id, item.qty - 1));
+      const qtySpan = document.createElement('span'); qtySpan.textContent = item.qty; qtySpan.style.minWidth='20px'; qtySpan.style.textAlign='center';
+      const plus = document.createElement('button'); plus.textContent = '+';
+      plus.addEventListener('click', () => updateQty(item.id, item.qty + 1));
+      const subtotal = document.createElement('div'); subtotal.style.minWidth='90px'; subtotal.style.textAlign='right';
+      subtotal.innerHTML = `<div style="font-weight:600">${formatRupiah(item.price * item.qty)}</div>`;
+      const removeBtn = document.createElement('button'); removeBtn.textContent = 'Hapus';
+      removeBtn.addEventListener('click', () => { if (confirm('Hapus item dari keranjang?')) { delete cart[item.id]; renderCart(); } });
+
+      const qtyControls = document.createElement('div');
+      qtyControls.appendChild(minus); qtyControls.appendChild(qtySpan); qtyControls.appendChild(plus);
+
+      right.appendChild(qtyControls); right.appendChild(subtotal); right.appendChild(removeBtn);
+      li.appendChild(right);
+      cartItemsEl.appendChild(li);
     });
+    cartTotalEl.textContent = formatRupiah(total);
+  }
 
-    // --- Fungsionalitas Pesanan WhatsApp Baru ---
-    if (orderButton) {
-        orderButton.addEventListener('click', () => {
-            sendOrderToWhatsApp();
-        });
-    }
+  function formatRupiah(value) {
+    return 'Rp ' + String(value).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+  function escapeHtml(text) {
+    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+    return text.replace(/[&<>"']/g, m => map[m]);
+  }
 
-    function sendOrderToWhatsApp() {
-        const selectedItem = document.querySelector('.menu-item.highlighted');
-        const tableNumber = tableNumberInput ? tableNumberInput.value.trim() : 'Tidak Ada';
+  if (orderButton) {
+    orderButton.addEventListener('click', () => {
+      const table = (tableInput?.value || '').trim();
+      if (!/^\d+$/.test(table)) { alert('Silakan masukkan nomor meja yang valid.'); tableInput?.focus(); return; }
+      const keys = Object.keys(cart);
+      if (keys.length === 0) { alert('Keranjang kosong. Tambahkan minimal 1 item.'); return; }
 
-        // 1. Validasi
-        if (!selectedItem) {
-            alert('Mohon pilih satu menu terlebih dahulu sebelum memesan!');
-            return;
-        }
+      let lines = [];
+      lines.push('Pesanan - Kopi Senja');
+      lines.push(`Meja: ${table}`);
+      lines.push('--------------------------------');
+      let total = 0;
+      keys.forEach(key => {
+        const it = cart[key];
+        const sub = it.price * it.qty; total += sub;
+        lines.push(`${it.name} x${it.qty} — ${formatRupiah(sub)}`);
+      });
+      lines.push('--------------------------------');
+      lines.push(`Total: ${formatRupiah(total)}`);
+      lines.push('');
+      lines.push('Mohon siapkan pesanan. Terima kasih!');
 
-        // Memastikan input meja adalah angka dan tidak kosong
-        if (tableNumber === '' || isNaN(tableNumber)) {
-            alert('Mohon masukkan Nomor Meja yang valid!');
-            if (tableNumberInput) tableNumberInput.focus();
-            return;
-        }
+      const message = encodeURIComponent(lines.join('\n'));
+      const waUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+      const newWin = window.open(waUrl, '_blank');
+      if (!newWin) window.location.href = waUrl;
+    });
+  }
 
-        // 2. Kumpulkan Detail Pesanan
-        const itemName = selectedItem.querySelector('h4').textContent;
-        const itemPrice = selectedItem.querySelector('.price').textContent; // Asumsi ada elemen dengan class 'price'
-        
-        // 3. Format Pesan
-        // Menggunakan encodeURIComponent untuk memastikan pesan aman di URL
-        let rawMessage = `☕ PESANAN BARU - KOPI SENJA ☕
------------------------------------
-Nomor Meja: *${tableNumber}*
------------------------------------
-Item Pesanan:
-  - ${itemName} (${itemPrice})
------------------------------------
-Mohon segera diproses. Terima kasih!`;
+  // render awal
+  renderCart();
 
-        const encodedMessage = encodeURIComponent(rawMessage);
-
-        // 4. Buat Tautan WhatsApp
-        // Menggunakan API wa.me dengan nomor yang sudah diformat dan pesan yang di-encode
-        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-        // 5. Arahkan ke WhatsApp
-        window.open(whatsappURL, '_blank');
-        
-        console.log('Pesanan telah dikirim ke WhatsApp!');
-        // Opsional: Hapus highlight setelah pesanan dikirim
-        selectedItem.classList.remove('highlighted');
-        if (tableNumberInput) tableNumberInput.value = '';
-    }
-});
+})();
