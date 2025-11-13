@@ -1,23 +1,150 @@
-<section id="order-section" class="section call-to-action">
-  <h2>Pesan Kopi Anda Sekarang!</h2>
-  <p>Pilih menu dengan tombol "Tambah", atur jumlah di keranjang, masukkan nomor meja, lalu klik tombol pesan untuk mengirimkan pesanan melalui WhatsApp.</p>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Senja - Kafe Hangat & Nyaman</title>
 
-  <div class="order-row">
-    <div class="order-form">
-      <label for="tableNumberInput">Nomor Meja Anda:</label>
-      <input type="text" id="tableNumberInput" placeholder="Contoh: 05" required>
-      <button id="orderButton">Pesan Sekarang via WhatsApp</button>
-    </div>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+</head>
+<body>
 
-    <aside class="cart">
-      <h3>Keranjang Pesanan</h3>
-      <ul id="cartItems" class="cart-items">
-        <li class="empty">Belum ada pesanan</li>
-      </ul>
-      <div class="cart-footer">
-        <p>Total: <span id="cartTotal">Rp 0</span></p>
-        <button id="clearCartBtn" class="small secondary">Kosongkan</button>
-      </div>
-    </aside>
-  </div>
-</section>
+    <header>
+        <h1>Kopi Senja</h1>
+        <nav>
+            <ul>
+                <li><a href="#tentang">Tentang Kami</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#order-section">Pesan</a></li>
+                <li><a href="#lokasi">Lokasi</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <div class="hero">
+            <h1>Roso Kediri, Sruput Sejati</h1>
+        </div>
+        
+        <section id="tentang" class="section">
+            <div class="section-content">
+                <h2>Tentang Kopi Senja</h2>
+                <p>Selamat datang di Kopi Senja, tempat di mana aroma kopi bertemu dengan suasana yang hangat dan nyaman. Kami menyajikan biji kopi pilihan terbaik dari seluruh Nusantara. Sempurna untuk bekerja, bersantai, atau berkumpul bersama teman.</p>
+            </div>
+            <div class="section-image">
+                <img src="foto cafe.jpg" alt="Interior Kafe Kopi Senja" title="Suasana Nyaman Kafe Kami">
+            </div>
+        </section>
+
+        <section id="menu" class="section">
+            <h2>Pilihan Menu Kami</h2>
+            
+            <h3>Menu Favorit </h3>
+            <div class="menu-grid">
+                
+                <div class="menu-item" data-id="espresso" data-price="22000">
+                    <img src="kopi espressoooo.jpg" alt="Espresso" title="Espresso">
+                    <h4>Espresso</h4>
+                    <p class="price">Rp 22.000</p>
+                    <button class="add-to-cart" type="button">Tambah</button>
+                </div>
+
+                <div class="menu-item" data-id="cappuccino" data-price="19000">
+                    <img src="cappucinoooooo.jpg" alt="Cappuccino" title="Cappuccino">
+                    <h4>Cappuccino</h4>
+                    <p class="price">Rp 19.000</p>
+                    <button class="add-to-cart" type="button">Tambah</button>
+                </div>
+
+                <div class="menu-item" data-id="latte-caramel" data-price="24000">
+                    <img src="caramel.jpg" alt="Latte Caramel" title="Latte Caramel">
+                    <h4>Latte Caramel</h4>
+                    <p class="price">Rp 24.000</p>
+                    <button class="add-to-cart" type="button">Tambah</button>
+                </div>
+
+                <div class="menu-item" data-id="kopi-susu" data-price="21000">
+                    <img src="kopi susu.jpeg" alt="Kopi Susu Senja" title="Kopi Susu Senja (House Blend)">
+                    <h4>Kopi Susu Senja</h4>
+                    <p class="price">Rp 21.000</p>
+                    <button class="add-to-cart" type="button">Tambah</button>
+                </div>
+                
+                <div class="menu-item" data-id="cheesecake" data-price="30000">
+                    <img src="cheesecake.jfif" alt="CheeseCake" title="CheeseCake (House Blend)">
+                    <h4>CheeseCake</h4>
+                    <p class="price">Rp 30.000</p>
+                    <button class="add-to-cart" type="button">Tambah</button>
+                </div>
+                
+                <div class="menu-item" data-id="cinnamon-roll" data-price="25000">
+                    <img src="cinamon.jpg" alt="Cinnamon Roll" title="Cinnamon Roll (House Blend)">
+                    <h4>Cinnamon Roll</h4>
+                    <p class="price">Rp 25.000</p>
+                    <button class="add-to-cart" type="button">Tambah</button>
+                </div>
+
+                <div class="menu-item" data-id="french-fries" data-price="13000">
+                    <img src="kentang.jpg" alt="French Fries" title="French Fries (House Blend)">
+                    <h4>French Fries</h4>
+                    <p class="price">Rp 13.000</p>
+                    <button class="add-to-cart" type="button">Tambah</button>
+                </div>
+
+                <div class="menu-item" data-id="dimsum" data-price="25000">
+                    <img src="dimsum.jpg" alt="Dimsum Mentai" title="Dimsum Mentai (House Blend)">
+                    <h4>Dimsum Mentai</h4>
+                    <p class="price">Rp 25.000</p>
+                    <button class="add-to-cart" type="button">Tambah</button>
+                </div>
+
+            </div>
+        </section>
+        
+        <section id="order-section" class="section call-to-action">
+            <h2>Pesan Kopi Anda Sekarang!</h2>
+            <p>Pilih menu dengan tombol "Tambah", atur jumlah di keranjang, masukkan nomor meja, lalu klik tombol pesan untuk mengirimkan pesanan melalui WhatsApp.</p>
+
+            <div class="order-row">
+                <div class="order-form">
+                    <label for="tableNumberInput">Nomor Meja Anda:</label>
+                    <input type="text" id="tableNumberInput" placeholder="Contoh: 05" required>
+                    
+                    <button id="orderButton">Pesan Sekarang via WhatsApp</button>
+                </div>
+
+                <aside class="cart">
+                    <h3>Keranjang Pesanan</h3>
+                    <ul id="cartItems" class="cart-items">
+                        <li class="empty">Belum ada pesanan</li>
+                    </ul>
+                    <div class="cart-footer">
+                        <p>Total: <span id="cartTotal">Rp 0</span></p>
+                        <button id="clearCartBtn" class="small secondary">Kosongkan</button>
+                    </div>
+                </aside>
+            </div>
+        </section>
+        <section id="lokasi" class="section">
+            <div class="section-content">
+                <h2>Temukan Kami</h2>
+                <p>Jl. Cinta No. 22, Kota Kediri. Kami buka setiap hari dari pukul 08:00-21:00.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="kontak">
+        <p>&copy; 2025 Kopi Senja. Semua Hak Cipta Dilindungi.</p>
+        <p>Hubungi Kami: <a href="mailto:anandaSalsa006@gmail.com">info@kopisenja.com</a> | Telp: 6285850978793</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
