@@ -12,9 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const orderButton = document.querySelector('#orderButton'); // Tombol "Pesan Sekarang" (Asumsi: ID orderButton)
     const tableNumberInput = document.querySelector('#tableNumberInput'); // Input Nomor Meja (Asumsi: ID tableNumberInput)
     
-    // --- Nomor WhatsApp Tujuan ---
-    // Ganti dengan nomor WhatsApp kafe Anda (tanpa tanda +, spasi, atau kurung)
-    const whatsappNumber = '085850978793'; // Contoh: Ganti dengan nomor yang benar
+    // --- Nomor WhatsApp Tujuan DENGAN PERBAIKAN ---
+    // Nomor WhatsApp dalam format internasional (kode negara 62, tanpa 0 di depan, tanpa simbol).
+    // Dulu: '085850978793'
+    const whatsappNumber = '6285850978793'; // Diperbaiki: Menggunakan 62 sebagai kode negara
 
     // --- Fungsi Scroll Header (Sticky Effect) ---
     window.addEventListener('scroll', () => {
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Memastikan input meja adalah angka dan tidak kosong
         if (tableNumber === '' || isNaN(tableNumber)) {
             alert('Mohon masukkan Nomor Meja yang valid!');
             if (tableNumberInput) tableNumberInput.focus();
@@ -69,18 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemPrice = selectedItem.querySelector('.price').textContent; // Asumsi ada elemen dengan class 'price'
         
         // 3. Format Pesan
-        let message = `*☕ PESANAN BARU - KOPI SENJA ☕*%0a`; // %0a adalah karakter baris baru
-        message += `-----------------------------------%0a`;
-        message += `Nomor Meja: *${tableNumber}*%0a`;
-        message += `-----------------------------------%0a`;
-        message += `Item Pesanan:%0a`;
-        message += `  - ${itemName} (${itemPrice})%0a`;
-        message += `-----------------------------------%0a`;
-        message += `Mohon segera diproses. Terima kasih!%0a`;
+        // Menggunakan encodeURIComponent untuk memastikan pesan aman di URL
+        let rawMessage = `☕ PESANAN BARU - KOPI SENJA ☕
+-----------------------------------
+Nomor Meja: *${tableNumber}*
+-----------------------------------
+Item Pesanan:
+  - ${itemName} (${itemPrice})
+-----------------------------------
+Mohon segera diproses. Terima kasih!`;
+
+        const encodedMessage = encodeURIComponent(rawMessage);
 
         // 4. Buat Tautan WhatsApp
-        // Menggunakan API wa.me untuk chat
-        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+        // Menggunakan API wa.me dengan nomor yang sudah diformat dan pesan yang di-encode
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
         // 5. Arahkan ke WhatsApp
         window.open(whatsappURL, '_blank');
