@@ -1,0 +1,154 @@
+/*
+ * File: style.css
+ * Deskripsi: Styling untuk Kafe Kopi Senja
+ */
+
+/* --- General & Body Styling --- */
+body {
+    font-family: 'Poppins', sans-serif; /* Menggunakan font modern (perlu di-import) */
+    margin: 0;
+    padding: 0;
+    background-color: #EDEAE4; /* Warna krem lembut, lebih baik dari f4f4f4 */
+    color: #4A4A4A;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif; /* Font berbeda untuk judul */
+    color: #6F4E37; /* Cokelat Kopi */
+    margin-top: 0;
+}
+
+.container {
+    width: 90%; /* Sedikit lebih lebar */
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+/* --- Header & Navigation Styling --- */
+header {
+    background-color: #6F4E37;
+    color: white;
+    padding: 1.5em 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+}
+
+nav ul {
+    /* Gaya flexbox sudah ada di HTML, hanya penyesuaian margin */
+    margin-top: 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #A08365; /* Warna hover yang lebih terang */
+}
+
+/* --- Hero Section Styling --- */
+.hero {
+    /* Background sudah didefinisikan di HTML, kita atur tampilannya */
+    background-image: url('cafe-image.jpg'); 
+    background-position: center;
+    background-size: cover;
+    height: 400px; /* Lebih tinggi */
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero h1 {
+    background-color: rgba(0, 0, 0, 0.4); /* Background semi-transparan untuk teks */
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    font-size: 3.5em;
+}
+
+/* --- Section Styling --- */
+.section {
+    background: white;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Menu Styling --- */
+#menu h3 {
+    border-bottom: 2px solid #D2B48C; /* Garis bawah elegan */
+    padding-bottom: 5px;
+    margin-top: 1.5em;
+}
+
+#menu ul, #menu ol {
+    list-style: none;
+    padding: 0;
+}
+
+#menu li {
+    background-color: #FAFAFA;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-left: 5px solid #6F4E37;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+}
+
+#menu li strong {
+    color: #A08365; /* Penekanan pada nama menu */
+}
+
+/* --- Footer Styling --- */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1.5em 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer a {
+    color: #D2B48C; /* Warna emas/krem untuk link */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* --- Media Queries untuk Responsif (Opsional) --- */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .hero h1 {
+        font-size: 2.5em;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+}
