@@ -1,36 +1,254 @@
 /*
- * File: script.js
- * Deskripsi: Interaktivitas untuk Kafe Kopi Senja
+ * File: style.css
+ * Deskripsi: Styling untuk Kafe Kopi Senja yang Ditingkatkan
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Ambil elemen-elemen yang dibutuhkan
-    const header = document.querySelector('header');
-    const menuListItems = document.querySelectorAll('#menu ul li');
+/* --- Variabel Warna --- */
+:root {
+    --color-coffee: #6F4E37; /* Cokelat tua */
+    --color-cream: #EDEAE4; /* Krem / latar belakang */
+    --color-light-brown: #A08365;
+    --color-gold: #D2B48C; /* Garis elegan */
+    --color-text: #4A4A4A;
+}
 
-    // --- Fungsi Scroll Header ---
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            // Tambahkan kelas 'scrolled' setelah menggulir 50px
-            header.classList.add('scrolled');
-        } else {
-            // Hapus kelas 'scrolled' jika kembali ke atas
-            header.classList.remove('scrolled');
-        }
-    });
+/* --- General & Body Styling --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-cream);
+    color: var(--color-text);
+    line-height: 1.6;
+}
 
-    // --- Fungsi Highlight Menu Item saat diklik ---
-    menuListItems.forEach(item => {
-        item.addEventListener('click', () => {
-            // Hapus kelas 'highlighted' dari semua item terlebih dahulu
-            menuListItems.forEach(i => i.classList.remove('highlighted'));
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--color-coffee);
+    margin-top: 0;
+}
 
-            // Tambahkan kelas 'highlighted' hanya pada item yang diklik
-            item.classList.add('highlighted');
-            
-            // Opsional: Tampilkan pesan konfirmasi di console
-            const itemName = item.querySelector('strong').textContent;
-            console.log(`Item dipilih: ${itemName}`);
-        });
-    });
-});
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+/* --- Header & Navigation Styling --- */
+header {
+    background-color: var(--color-coffee);
+    color: white;
+    padding: 1.5em 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky; /* Membuat header selalu terlihat */
+    top: 0;
+    z-index: 1000;
+    transition: padding 0.3s ease, background-color 0.3s ease;
+}
+
+/* Efek saat menggulir (JavaScript akan menambahkan kelas ini) */
+header.scrolled {
+    padding: 0.8em 0;
+    background-color: #5A402D;
+}
+
+header.scrolled h1 {
+    font-size: 2em; 
+    transition: font-size 0.3s ease;
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+}
+
+nav ul {
+    list-style: none;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 600;
+}
+
+nav ul li a:hover {
+    background-color: var(--color-light-brown);
+}
+
+/* --- Hero Section Styling --- */
+.hero {
+    background-image: url('cafe-image.jpg'); /* Ganti dengan gambar Anda */
+    background-position: center;
+    background-size: cover;
+    height: 400px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero h1 {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    font-size: 3.5em;
+}
+
+/* --- Section Styling (Umum dan Tata Letak Gambar) --- */
+.section {
+    background: white;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+#tentang.section, #lokasi.section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.section-content {
+    flex: 2; 
+}
+
+.section-image {
+    flex: 1; 
+    min-width: 250px;
+}
+.section-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* --- Menu Styling --- */
+#menu h3 {
+    border-bottom: 2px solid var(--color-gold); 
+    padding-bottom: 5px;
+    margin-top: 1.5em;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.menu-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    background-color: #FAFAFA;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
+}
+
+/* Efek Highlight (dari JS) */
+.menu-item.highlighted {
+    border: 3px solid #FFD700; 
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(255, 215, 0, 0.4);
+}
+
+
+.menu-item img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.menu-item h4 {
+    margin: 5px 0;
+    color: var(--color-coffee);
+}
+
+.menu-item p {
+    font-weight: bold;
+    color: var(--color-light-brown);
+    margin: 0;
+}
+
+.snack-list ul {
+    list-style: square;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+.snack-list li {
+    padding: 5px 0;
+}
+
+
+/* --- Footer Styling --- */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1.5em 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer a {
+    color: var(--color-gold); 
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* --- Media Queries untuk Responsif --- */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    #tentang.section, #lokasi.section {
+        flex-direction: column; 
+    }
+
+    .hero h1 {
+        font-size: 2.5em;
+    }
+
+    nav ul {
+        flex-wrap: wrap; 
+    }
+
+    nav ul li {
+        margin: 5px 10px;
+    }
+}
