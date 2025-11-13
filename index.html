@@ -1,57 +1,110 @@
-<section id="menu" class="section">
-    <h2>Pilihan Menu Kami</h2>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Senja - Kafe Hangat & Nyaman</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     
-    <h3>Kopi Favorit (Klik untuk Memilih!)</h3>
-    <div class="menu-grid">
-        
-        <div class="menu-item">
-            <img src="kopi espressoooo.jpg" alt="Espresso" title="Espresso">
-            <h4>Espresso</h4>
-            <p class="price">Rp 25.000</p> </div>
-
-        <div class="menu-item">
-            <img src="cappucinoooooo.jpg" alt="Cappuccino" title="Cappuccino">
-            <h4>Cappuccino</h4>
-            <p class="price">Rp 19.000</p> </div>
-
-        <div class="menu-item">
-            <img src="caramel.jpg" alt="Latte Caramel" title="Latte Caramel">
-            <h4>Latte Caramel</h4>
-            <p class="price">Rp 24.000</p> </div>
-
-        <div class="menu-item">
-            <img src="kopi susu.jpeg" alt="Kopi Susu Senja" title="Kopi Susu Senja (House Blend)">
-            <h4>Kopi Susu Senja</h4>
-            <p class="price">Rp 21.000</p> </div>
-
-    </div>
+    <link rel="stylesheet" href="style.css"> 
     
-    <h3>Camilan Manis (Pesan Langsung ke Kasir)</h3>
-    <div class="menu-grid">
+</head>
+<body>
+
+    <header>
+        <h1>Kopi Senja</h1>
+        <nav>
+            <ul>
+                <li><a href="#tentang">Tentang Kami</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#order-section">Pesan</a></li> <li><a href="#lokasi">Lokasi</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
         
-        <div class="menu-item">
-            <img src="cheesecake-lumer.jpg" alt="Cheesecake Lumer" title="Cheesecake Lumer">
-            <h4>Cheesecake Lumer</h4>
-            <p>Rp 20.000</p>
-        </div>
-
-        <div class="menu-item">
-            <img src="croissant-cokelat.jpg" alt="Croissant Cokelat" title="Croissant Cokelat">
-            <h4>Croissant Cokelat</h4>
-            <p>Rp 25.000</p>
-        </div>
-
-        <div class="menu-item">
-            <img src="donat-kampung.jpg" alt="Donat Kampung" title="Donat Kampung">
-            <h4>Donat Kampung</h4>
-            <p>Rp 8.000</p>
-        </div>
-
-        <div class="menu-item">
-            <img src="keju-aroma.jpg" alt="Keju Aroma" title="Keju Aroma">
-            <h4>Keju Aroma</h4>
-            <p>Rp 13.000</p>
+        <div class="hero">
+            <h1>Roso Kediri, Sruput Sejati</h1>
         </div>
         
-    </div>
-</section>
+        <section id="tentang" class="section">
+            <div class="section-content">
+                <h2>Tentang Kopi Senja</h2>
+                <p>Selamat datang di Kopi Senja, tempat di mana aroma kopi bertemu dengan suasana yang hangat dan nyaman. Kami menyajikan biji kopi pilihan terbaik dari seluruh Nusantara. Sempurna untuk bekerja, bersantai, atau berkumpul bersama teman.</p>
+            </div>
+            <div class="section-image">
+                <img src="foto cafe.jpg" alt="Interior Kafe Kopi Senja" title="Suasana Nyaman Kafe Kami">
+            </div>
+        </section>
+
+        <section id="menu" class="section">
+            <h2>Pilihan Menu Kami</h2>
+            
+            <h3>Kopi Favorit (Klik untuk Memilih!)</h3>
+            <div class="menu-grid">
+                
+                <div class="menu-item">
+                    <img src="kopi espressoooo.jpg" alt="Espresso" title="Espresso">
+                    <h4>Espresso</h4>
+                    <p class="price">Rp 22.000</p> </div>
+
+                <div class="menu-item">
+                    <img src="cappucinoooooo.jpg" alt="Cappuccino" title="Cappuccino">
+                    <h4>Cappuccino</h4>
+                    <p class="price">Rp 10.000</p> </div>
+
+                <div class="menu-item">
+                    <img src="caramel.jpg" alt="Latte Caramel" title="Latte Caramel">
+                    <h4>Latte Caramel</h4>
+                    <p class="price">Rp 24.000</p> </div>
+
+                <div class="menu-item">
+                    <img src="kopi susu.jpeg" alt="Kopi Susu Senja" title="Kopi Susu Senja (House Blend)">
+                    <h4>Kopi Susu Senja</h4>
+                    <p class="price">Rp 13.000</p> </div>
+
+            </div>
+            
+            <h3>Camilan Manis (Pesan Langsung ke Kasir)</h3>
+            <div class="snack-list">
+                <ul>
+                    <li>Cheesecake Lumer - Rp 20.000</li>
+                    <li>Croissant Cokelat - Rp 25.000</li> 
+                    <li>Donat Kampung - Rp 8.000</li>
+                    <li>Keju Aroma - Rp 13.000</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="order-section" class="section call-to-action">
+            <h2>Pesan Kopi Anda Sekarang!</h2>
+            <p>Pilih salah satu menu kopi di atas, masukkan nomor meja Anda, lalu klik tombol pesan untuk mengirimkan pesanan melalui WhatsApp.</p>
+
+            <div class="order-form">
+                <label for="tableNumberInput">Nomor Meja Anda:</label>
+                <input type="number" id="tableNumberInput" placeholder="Contoh: 05" required min="1">
+                
+                <button id="orderButton">Pesan Sekarang via WhatsApp</button>
+            </div>
+        </section>
+        <section id="lokasi" class="section">
+            <div class="section-content">
+                <h2>Temukan Kami</h2>
+                <p>Jl. Cinta No. 22, Kota Kediri. Kami buka setiap hari dari pukul 08:00 hingga 21:00.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="kontak">
+        <p>&copy; 2025 Kopi Senja. Semua Hak Cipta Dilindungi.</p>
+        <p>Hubungi Kami: <a href="anandaSalsa006@gmail.com">info@kopisenja.com</a> | Telp: 085850978793</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
